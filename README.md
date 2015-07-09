@@ -1,2 +1,2 @@
 # ParallelTestRunner
-Parallel test runner for Visual Studio.
+Parallel test runner for Visual Studio vstest
