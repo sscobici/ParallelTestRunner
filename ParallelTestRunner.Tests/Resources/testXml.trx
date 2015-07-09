@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="11097a41-403d-4f07-9c42-9bdb807ca995" name="user@HOST 2015-06-15 15:49:10" runUser="DOMAIN\user" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2015-06-15T15:49:10.4673355+03:00" queuing="2015-06-15T15:49:10.4673355+03:00" start="2015-06-15T15:49:10.4703360+03:00" finish="2015-06-15T15:49:14.4629318+03:00" />
+  <TestSettings name="default" id="cc5b9254-b0e7-494d-8f6b-5e5aaa99b6b7">
+    <Execution>
+      <TestTypeSpecific />
+    </Execution>
+    <Deployment runDeploymentRoot="user_HOST 2015-06-15 15_49_10" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="951b4807-6b31-4d74-bf5a-54cc1f1691c1" testId="1adc189d-87ce-608e-4b5f-e31dcf2191d4" testName="Class9TestMethod1" computerName="HOST" duration="00:00:01.0048184" startTime="2015-06-15T15:49:07.3595347+03:00" endTime="2015-06-15T15:49:08.3954674+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="951b4807-6b31-4d74-bf5a-54cc1f1691c1" /> 
+    <UnitTestResult executionId="a454911c-297b-42a1-aa65-63f637221e8b" testId="68bda45d-e9d2-5c43-6344-25dc51c58d08" testName="Class9TestMethod3" computerName="HOST" duration="00:00:03.0097333" startTime="2015-06-15T15:49:10.4222943+03:00" endTime="2015-06-15T15:49:13.4320378+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a454911c-297b-42a1-aa65-63f637221e8b">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;3&gt;. Actual:&lt;2&gt;. </Message>
+          <StackTrace>   at UITests.Class9.Class9TestMethod3() in d:\work\ParTests\UnitTestRunner\UITests\Class9.cs:line 28
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Class9TestMethod1" storage="d:\ut\uitests.dll" id="1adc189d-87ce-608e-4b5f-e31dcf2191d4">
+      <Execution id="951b4807-6b31-4d74-bf5a-54cc1f1691c1" />
+      <TestMethod codeBase="D:\UT\UITests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter" className="UITests.Class9" name="Class9TestMethod1" />
+    </UnitTest>
+    <UnitTest name="Class9TestMethod3" storage="d:\ut\uitests.dll" id="68bda45d-e9d2-5c43-6344-25dc51c58d08">
+      <Execution id="a454911c-297b-42a1-aa65-63f637221e8b" />
+      <TestMethod codeBase="D:\UT\UITests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter" className="UITests.Class9" name="Class9TestMethod3" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1adc189d-87ce-608e-4b5f-e31dcf2191d4" executionId="951b4807-6b31-4d74-bf5a-54cc1f1691c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />    
+    <TestEntry testId="68bda45d-e9d2-5c43-6344-25dc51c58d08" executionId="a454911c-297b-42a1-aa65-63f637221e8b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="2" passed="3" failed="4" error="5" timeout="6" aborted="7" inconclusive="8" passedButRunAborted="9" notRunnable="10" notExecuted="11" disconnected="12" warning="13" completed="14" inProgress="15" pending="16" />
+    <Output>
+      <StdOut>Test 'TestOpen' was skipped in the test run.</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7221E662-3C84-4FEF-81A1-0E486F3C2CE0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParallelTestRunner</RootNamespace>
+    <AssemblyName>ParallelTestRunner</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Instrumentation" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Autofac\AutofacContainer.cs" />
+    <Compile Include="Common\IExecutorThread.cs" />
+    <Compile Include="Common\Impl\ExecutorThreadImpl.cs" />
+    <Compile Include="Common\Impl\SummaryCalculatorImpl.cs" />
+    <Compile Include="Common\Impl\ThreadFactoryImpl.cs" />
+    <Compile Include="Common\Impl\WindowsFileHelperImpl.cs" />
+    <Compile Include="Common\ISummaryCalculator.cs" />
+    <Compile Include="Common\IThreadFactory.cs" />
+    <Compile Include="Common\IWindowsFileHelper.cs" />
+    <Compile Include="Common\NativeMethods.cs" />
+    <Compile Include="Common\Trx\TestResult.cs" />
+    <Compile Include="Common\Trx\ResultFile.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ICleaner.cs" />
+    <Compile Include="Common\IBreaker.cs" />
+    <Compile Include="Common\Impl\BreakerImpl.cs" />
+    <Compile Include="Common\Impl\RunDataBlockingBuilderImpl.cs" />
+    <Compile Include="Impl\TestRunnerArgsFactoryImpl.cs" />
+    <Compile Include="ITestRunnerArgsFactory.cs" />
+    <Compile Include="ICollector.cs" />
+    <Compile Include="Common\IExecutorLauncher.cs" />
+    <Compile Include="IExecutor.cs" />
+    <Compile Include="Common\Impl\ExecutorLauncherImpl.cs" />
+    <Compile Include="Common\Impl\RunDataListBuilderImpl.cs" />
+    <Compile Include="Common\IRunDataListBuilder.cs" />
+    <Compile Include="Common\Impl\RunDataNonBlockingBuilderImpl.cs" />
+    <Compile Include="Common\Impl\RunDataEnumeratorImpl.cs" />
+    <Compile Include="Impl\TestRunnerArgsImpl.cs" />
+    <Compile Include="Common\IRunDataBuilder.cs" />
+    <Compile Include="Common\RunData.cs" />
+    <Compile Include="Common\TestAssembly.cs" />
+    <Compile Include="Common\TestFixture.cs" />
+    <Compile Include="IParser.cs" />
+    <Compile Include="Impl\TestRunnerImpl.cs" />
+    <Compile Include="Common\IRunDataEnumerator.cs" />
+    <Compile Include="ITestRunner.cs" />
+    <Compile Include="ITestRunnerArgs.cs" />
+    <Compile Include="VSTest\Common\Impl\ProcessOutputReaderImpl.cs" />
+    <Compile Include="VSTest\Common\Impl\ProcessOutputReaderFactoryImpl.cs" />
+    <Compile Include="VSTest\Common\IProcessOutputReader.cs" />
+    <Compile Include="VSTest\Common\IProcessOutputReaderFactory.cs" />
+    <Compile Include="VSTest\Impl\VSTestCleanerImpl.cs" />
+    <Compile Include="VSTest\Impl\VSTestCollectorImpl.cs" />
+    <Compile Include="VSTest\Impl\VSTestExecutorImpl.cs" />
+    <Compile Include="VSTest\Common\IVSTestFileHelper.cs" />
+    <Compile Include="VSTest\Common\Impl\VSTestFileHelperImpl.cs" />
+    <Compile Include="VSTest\Common\Impl\ProcessFactoryImpl.cs" />
+    <Compile Include="VSTest\Common\Impl\ProcessStartInfoFactoryImpl.cs" />
+    <Compile Include="VSTest\Common\IProcessFactory.cs" />
+    <Compile Include="VSTest\Common\IProcessStartInfoFactory.cs" />
+    <Compile Include="VSTest\Impl\VSTestParserImpl.cs" />
+    <Compile Include="Common\Trx\ResultSummary.cs" />
+    <Compile Include="VSTest\Impl\TrxParser.cs" />
+    <Compile Include="Common\Impl\TrxWriter.cs" />
+    <Compile Include="VSTest\ITrxParser.cs" />
+    <Compile Include="Common\ITrxWriter.cs" />
+    <Compile Include="Process2\AsyncStreamReader.cs" />
+    <Compile Include="Process2\DataReceivedEventArgs.cs" />
+    <Compile Include="Process2\DataReceivedEventHandler.cs" />
+    <Compile Include="Process2\ModuleInfo.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Process2\NativeMethods.cs" />
+    <Compile Include="Process2\NtProcessInfoHelper.cs" />
+    <Compile Include="Process2\NtProcessManager.cs" />
+    <Compile Include="Process2\Process2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process2\ProcessInfo.cs" />
+    <Compile Include="Process2\ProcessManager.cs" />
+    <Compile Include="Process2\ProcessWaitHandle.cs" />
+    <Compile Include="Process2\SafeLocalAllocHandle.cs" />
+    <Compile Include="Process2\SafeLocalMemHandle.cs" />
+    <Compile Include="Process2\SafeNativeMethods.cs" />
+    <Compile Include="Process2\SafeProcessHandle.cs" />
+    <Compile Include="Process2\SafeThreadHandle.cs" />
+    <Compile Include="Process2\SharedUtils.cs" />
+    <Compile Include="Process2\ThreadInfo.cs" />
+    <Compile Include="Process2\Win32Native.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

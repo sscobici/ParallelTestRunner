@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D5AEB33-19A7-4073-ACEC-64A1D79624A5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParallelTestRunner.Tests</RootNamespace>
+    <AssemblyName>ParallelTestRunner.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Autofac\AutofacContainerTest.cs" />
+    <Compile Include="Common\BreakerTest.cs" />
+    <Compile Include="Common\ExecutorLauncherTest.cs" />
+    <Compile Include="Common\ExecutorThreadTest.cs" />
+    <Compile Include="Common\RunDataBlockingBuilderTest.cs" />
+    <Compile Include="Common\RunDataEnumeratorTest.cs" />
+    <Compile Include="Common\RunDataListBuilderTest.cs" />
+    <Compile Include="Common\SummaryCalculatorTest.cs" />
+    <Compile Include="Common\ThreadFactoryTest.cs" />
+    <Compile Include="Common\TrxWriterTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="TestClassGroupAttribute.cs" />
+    <Compile Include="VSTest\Common\VstestFileHelperTest.cs" />
+    <Compile Include="VSTest\Common\ProcessOutputReaderFactoryTest.cs" />
+    <Compile Include="VSTest\Common\ProcessOutputReaderTest.cs" />
+    <Compile Include="VSTest\Common\ProcessStartInfoFactoryTest.cs" />
+    <Compile Include="VSTest\VSTestCleanerTest.cs" />
+    <Compile Include="VSTest\VSTestCollectorTest.cs" />
+    <Compile Include="VSTest\VSTestExecutorTest.cs" />
+    <Compile Include="VSTest\VSTestParserTest.cs" />
+    <Compile Include="VSTest\TrxParserTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="TestRunnerArgsFactoryTest.cs" />
+    <Compile Include="TestRunnerArgsTest.cs" />
+    <Compile Include="TestRunnerTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Resources\testXml.trx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParallelTestRunner\ParallelTestRunner.csproj">
+      <Project>{7221e662-3c84-4fef-81a1-0e486f3c2ce0}</Project>
+      <Name>ParallelTestRunner</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
