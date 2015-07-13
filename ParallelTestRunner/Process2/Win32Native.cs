@@ -148,13 +148,6 @@ namespace ParallelTestRunner.Process2
             internal short wProcessorLevel;
             internal short wProcessorRevision;
         }
-        [StructLayout(LayoutKind.Sequential)]
-        internal class SECURITY_ATTRIBUTES
-        {
-            internal int nLength;
-            internal unsafe byte* pSecurityDescriptor = null;
-            internal int bInheritHandle;
-        }
         [Serializable]
         internal struct WIN32_FILE_ATTRIBUTE_DATA
         {
@@ -356,16 +349,6 @@ namespace ParallelTestRunner.Process2
             internal Win32Native.SID_AND_ATTRIBUTES User;
         }
 
-        internal struct MEMORY_BASIC_INFORMATION
-        {
-            internal unsafe void* BaseAddress;
-            internal unsafe void* AllocationBase;
-            internal uint AllocationProtect;
-            internal UIntPtr RegionSize;
-            internal uint State;
-            internal uint Protect;
-            internal uint Type;
-        }
         internal struct NlsVersionInfoEx
         {
             internal int dwNLSVersionInfoSize;
@@ -810,26 +793,6 @@ namespace ParallelTestRunner.Process2
             IntPtr procAddress = Win32Native.GetProcAddress(moduleHandle, methodName);
             return procAddress != IntPtr.Zero;
         }
-        [SecurityCritical]
-        internal static SafeFileHandle SafeCreateFile(string lpFileName, int dwDesiredAccess, FileShare dwShareMode, Win32Native.SECURITY_ATTRIBUTES securityAttrs, FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile)
-        {
-            SafeFileHandle safeFileHandle = Win32Native.CreateFile(lpFileName, dwDesiredAccess, dwShareMode, securityAttrs, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
-            if (!safeFileHandle.IsInvalid)
-            {
-                int fileType = Win32Native.GetFileType(safeFileHandle);
-                if (fileType != 1)
-                {
-                    safeFileHandle.Dispose();
-                    throw new NotSupportedException("NotSupported_FileStreamOnNonFiles");
-                }
-            }
-            return safeFileHandle;
-        }
-        [SecurityCritical]
-        internal static SafeFileHandle UnsafeCreateFile(string lpFileName, int dwDesiredAccess, FileShare dwShareMode, Win32Native.SECURITY_ATTRIBUTES securityAttrs, FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile)
-        {
-            return Win32Native.CreateFile(lpFileName, dwDesiredAccess, dwShareMode, securityAttrs, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
-        }
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport("kernel32.dll")]
         internal static extern int GetFileType(SafeFileHandle handle);
@@ -849,8 +812,6 @@ namespace ParallelTestRunner.Process2
         }
         [DllImport("kernel32.dll", BestFitMapping = false, CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
         private static extern IntPtr GetProcAddress(IntPtr hModule, string methodName);
-        [DllImport("kernel32.dll", BestFitMapping = false, CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern SafeFileHandle CreateFile(string lpFileName, int dwDesiredAccess, FileShare dwShareMode, Win32Native.SECURITY_ATTRIBUTES securityAttrs, FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
         [DllImport("kernel32.dll", EntryPoint = "SetErrorMode", ExactSpelling = true)]
         private static extern int SetErrorMode_VistaAndOlder(int newMode);
         [DllImport("kernel32.dll", EntryPoint = "SetThreadErrorMode", SetLastError = true)]

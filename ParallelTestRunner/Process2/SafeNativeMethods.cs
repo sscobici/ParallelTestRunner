@@ -75,10 +75,6 @@ namespace ParallelTestRunner.Process2
         public static extern bool FreeLibrary(HandleRef hModule);
         [DllImport("kernel32.dll", BestFitMapping = false, CharSet = CharSet.Auto)]
         public static extern bool GetComputerName(StringBuilder lpBuffer, int[] nSize);
-        public unsafe static int InterlockedCompareExchange(IntPtr pDestination, int exchange, int compare)
-        {
-            return Interlocked.CompareExchange(ref *(int*)pDestination.ToPointer(), exchange, compare);
-        }
         [DllImport("perfcounter.dll", CharSet = CharSet.Auto)]
         public static extern int FormatFromRawValue(uint dwCounterType, uint dwFormat, ref long pTimeBase, NativeMethods.PDH_RAW_COUNTER pRawValue1, NativeMethods.PDH_RAW_COUNTER pRawValue2, NativeMethods.PDH_FMT_COUNTERVALUE pFmtValue);
         [DllImport("kernel32.dll", SetLastError = true)]
