@@ -5,4 +5,5 @@
 *csproj.user
 packages/Autofac*
 packages/RhinoMocks*
+packages/StyleCop.MSBuild*
 *.suo

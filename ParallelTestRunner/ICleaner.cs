@@ -5,6 +5,7 @@ namespace ParallelTestRunner
 {
     public interface ICleaner
     {
+
         void Clean(IList<RunData> items);
     }
 }
