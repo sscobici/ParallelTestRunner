@@ -22,7 +22,7 @@ Examples:
 
 # Download
 See [releases](https://github.com/sscobici/ParallelTestRunner/releases).
-Build was created by [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) Continuous Integration tool
+Build was created with the help of [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) Continuous Integration tool
 
 # Issues
 Feel free to open an [issue](https://github.com/sscobici/ParallelTestRunner/issues) if the tool needs to be enhanced or you have found a bug 
