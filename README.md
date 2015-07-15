@@ -2,7 +2,7 @@
 Parallel test runner for Visual Studio tests
 
 # Description
-Allows parallel run of Visual Studio tests from command line. Primary usage is to speed up slow tests during Continuous Integration. It is possible for example to write [Selenium](http://www.seleniumhq.org/) UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and [Selenium Grid](http://www.seleniumhq.org/projects/grid/). Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] in each of them. The tool generates result.trx file by merging all test classes results.
+Allows parallel run of Visual Studio tests from the command line. Primary usage is to speed up slow tests during Continuous Integration process. It is possible for example to write [Selenium](http://www.seleniumhq.org/) UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and [Selenium Grid](http://www.seleniumhq.org/projects/grid/). Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] in each of them. The tool generates result.trx file by merging all test classes results.
 
 # Usage
 ```
