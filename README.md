@@ -20,9 +20,58 @@ Examples:
   ParallelTestRunner.exe provider:VSTEST_2013 threadcount:10 root:./TestResults out:result.trx ./UITests/SeleniumIntegration.Tests.dll
 ```
 
+# Download
+See [releases](https://github.com/sscobici/ParallelTestRunner/releases).
+Build was created by [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) Continuous Integration tool
+
+# Additional Information
+By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively.
+There is a possibility to group several TestClasses in order to execute them consecutively.
+
+Create the following Attribute in your test project:
+```
+    public class TestClassGroupAttribute : Attribute
+    {
+        public TestClassGroupAttribute()
+        {
+        }
+
+        public TestClassGroupAttribute(string name)
+        {
+            Name = name;
+        }
+
+        public TestClassGroupAttribute(string name, bool exclusive)
+            : this(name)
+        {
+            Exclusive = exclusive;
+        }
+
+        public string Name { get; set; }
+        
+        public bool Exclusive { get; set; }
+    }
+```
+
+In the below example two groups are defined to be executed in parallel. ClassA and ClassB tests will be executed consecutively.
+
+```
+[TestClassGroup("FirstGroup")]
+ClassA { ... }
+
+[TestClassGroup("FirstGroup")]
+ClassB { ... }
+
+[TestClassGroup("SecondGroup")]
+ClassC { ... }
+```
+
+Specify attribute parameter Exclusive = true if there is a need to run some tests exclusively. This will ensure that no other tests are run in parallel at that time.
+
+```
+[TestClassGroup("ExclusiveGroup", Exclusive = true)]
+ClassExclusive { ... }
+```
+
 # Requirements
 .Net Framework 4.5 or higher
-
-# Download
-See gihub [releases](https://github.com/sscobici/ParallelTestRunner/releases).
-Build was created by [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) Continuous Integration tool
