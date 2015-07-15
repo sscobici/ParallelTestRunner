@@ -21,7 +21,8 @@ Examples:
 ```
 
 # Requirements
-.Net Framework 4.0 or higher
+.Net Framework 4.5 or higher
 
 # Download
-See gihub [releases](https://github.com/sscobici/ParallelTestRunner/releases) created by [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) or download github zip and compile the tool by your self
+See gihub [releases](https://github.com/sscobici/ParallelTestRunner/releases).
+Build was created by [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) Continuous Integration tool
