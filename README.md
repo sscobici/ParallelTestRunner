@@ -24,6 +24,9 @@ Examples:
 See [releases](https://github.com/sscobici/ParallelTestRunner/releases).
 Build was created by [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) Continuous Integration tool
 
+# Issues
+Feel free to open an [issue](https://github.com/sscobici/ParallelTestRunner/issues) if the tool needs to be enhanced or you have found a bug 
+
 # Additional Information
 By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively.
 There is a possibility to group several TestClasses in order to execute them consecutively.
