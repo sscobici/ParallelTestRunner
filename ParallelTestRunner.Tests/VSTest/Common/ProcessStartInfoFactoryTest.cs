@@ -42,8 +42,8 @@ namespace ParallelTestRunner.Tests.VSTest.Common
             Assert.IsFalse(actual.UseShellExecute);
             Assert.AreEqual(input.Executable, actual.FileName);
             Assert.AreEqual(
-                input.AssemblyName +
-                 " /settings:" + string.Concat(input.Root, "\\", input.RunId, ".settings") +
+                "\"" + input.AssemblyName + "\"" +
+                 " \"/settings:" + string.Concat(input.Root, "\\", input.RunId, ".settings\"") +
                  " /logger:trx" +
                  " /Tests:Fixture1,Fixture2,Fixture3",
                  actual.Arguments);

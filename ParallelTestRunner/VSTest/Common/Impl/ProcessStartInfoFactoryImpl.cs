@@ -15,8 +15,8 @@ namespace ParallelTestRunner.VSTest.Common.Impl
             {
                 FileName = data.Executable,
                 Arguments =
-                    data.AssemblyName +
-                    " /settings:" + settings +
+                    "\"" + data.AssemblyName + "\"" +
+                    " \"/settings:" + settings + "\"" +
                     " /logger:trx" +
                     " /Tests:" + testNames,
                 RedirectStandardOutput = true,

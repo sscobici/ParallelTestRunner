@@ -47,7 +47,19 @@ namespace ParallelTestRunner.Impl
 
         public void Execute()
         {
+            if (WindowsFileHelper.FolderExist(Args.Root) == false)
+            {
+                WindowsFileHelper.CreateFolder(Args.Root);
+            }
+
             IRunDataEnumerator enumerator = RunDataListBuilder.GetEnumerator();
+
+            if (enumerator.HasItems() == false)
+            {
+                Console.WriteLine("Test Classes where not found, nothing to run");
+                return;
+            }
+
             while (enumerator.HasItems())
             {
                 if (Breaker.IsBreakReceived())
@@ -95,6 +107,12 @@ namespace ParallelTestRunner.Impl
 
             IList<RunData> items = RunDataListBuilder.GetFull();
             IList<ResultFile> results = Collector.Collect(items);
+
+            if (results.Count == 0)
+            {
+                Console.WriteLine("No results where generated, nothing to merge to the output trx");
+                return;
+            }
 
             using (Stream stream = TrxWriter.OpenResultFile(Args))
             {

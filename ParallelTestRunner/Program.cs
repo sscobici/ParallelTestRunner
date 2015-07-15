@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using ParallelTestRunner.Autofac;
 using ParallelTestRunner.Impl;
+using System.Reflection;
 
 namespace ParallelTestRunner
 {
@@ -12,7 +13,7 @@ namespace ParallelTestRunner
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("Parallel Test Execution Command Line Tool Version 1.0.0.0");
+            Console.WriteLine("Parallel Test Execution Command Line Tool Version " + Assembly.GetCallingAssembly().GetName().Version.ToString());
             Console.WriteLine();
 
             ITestRunnerArgs testArgs = argsFactory.ParseArgs(args);

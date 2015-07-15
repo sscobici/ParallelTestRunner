@@ -25,6 +25,10 @@ namespace ParallelTestRunner.Impl
                 else if (item.StartsWith("root:"))
                 {
                     data.Root = item.Remove(0, 5);
+                    if (data.Root.EndsWith("\\") || data.Root.EndsWith("/"))
+                    {
+                        data.Root = data.Root.Substring(0, data.Root.Length - 1);
+                    }
                 }
                 else if (item.StartsWith("out:"))
                 {

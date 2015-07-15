@@ -39,6 +39,14 @@ namespace ParallelTestRunner.Tests
         }
 
         [TestMethod]
+        public void ParseArgs_Root_EndsWithSlash()
+        {
+            string[] input = new string[] { "bbc.dll", "root:THE_ROOT_OF_THE_HAVEN/" };
+            ITestRunnerArgs args = target.ParseArgs(input);
+            Assert.AreEqual("THE_ROOT_OF_THE_HAVEN", args.Root);
+        }
+
+        [TestMethod]
         public void ParseArgs_Out()
         {
             string[] input = new string[] { "cab.dll", "out:THE_EPIC_OUTPUT" };

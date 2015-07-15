@@ -23,5 +23,7 @@ namespace ParallelTestRunner.Common
         Assembly GetAssembly(string path);
 
         Stream OpenResultFile(ITestRunnerArgs args);
+
+        bool FolderExist(string path);
     }
 }

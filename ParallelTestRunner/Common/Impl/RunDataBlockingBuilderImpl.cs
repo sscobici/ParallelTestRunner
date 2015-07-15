@@ -45,7 +45,6 @@ namespace ParallelTestRunner.Common.Impl
                 Fixtures = new List<TestFixture>() { fixture },
                 Root = args.Root,
                 Output = new StringBuilder(),
-                Error = new StringBuilder(),
                 Groups = new HashSet<string>(),
                 Exclusive = fixture.Exclusive,
                 Executable = args.GetExecutablePath(),

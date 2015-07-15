@@ -21,7 +21,5 @@ namespace ParallelTestRunner.Common
         public Guid RunId { get; set; }
 
         public StringBuilder Output { get; set; }
-
-        public StringBuilder Error { get; set; }
     }
 }

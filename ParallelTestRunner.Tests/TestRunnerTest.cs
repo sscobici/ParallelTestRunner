@@ -61,7 +61,6 @@ namespace ParallelTestRunner.Tests
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
                 enumerator.Expect((m) => m.HasItems()).Return(false);
-                executorLauncher.Expect((m) => m.WaitForAll());
             }
 
             VerifyTarget(() => target.Execute());
@@ -73,6 +72,7 @@ namespace ParallelTestRunner.Tests
             using (Ordered())
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(true);
             }
@@ -86,6 +86,7 @@ namespace ParallelTestRunner.Tests
             using (Ordered())
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(false);
                 executorLauncher.Expect((m) => m.WaitForAnyThreadToComplete());
@@ -104,6 +105,7 @@ namespace ParallelTestRunner.Tests
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(false);
                 executorLauncher.Expect((m) => m.WaitForAnyThreadToComplete());
                 executorLauncher.Expect((m) => m.HasFreeThreads()).Return(true);
@@ -119,6 +121,7 @@ namespace ParallelTestRunner.Tests
             using (Ordered())
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(false);
                 executorLauncher.Expect((m) => m.WaitForAnyThreadToComplete());
@@ -138,6 +141,7 @@ namespace ParallelTestRunner.Tests
             using (Ordered())
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(false);
                 executorLauncher.Expect((m) => m.WaitForAnyThreadToComplete());
@@ -160,6 +164,7 @@ namespace ParallelTestRunner.Tests
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(false);
                 executorLauncher.Expect((m) => m.WaitForAnyThreadToComplete());
                 executorLauncher.Expect((m) => m.HasFreeThreads()).Return(true);
@@ -180,6 +185,7 @@ namespace ParallelTestRunner.Tests
             using (Ordered())
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(false);
                 executorLauncher.Expect((m) => m.WaitForAnyThreadToComplete());
@@ -203,6 +209,7 @@ namespace ParallelTestRunner.Tests
             using (Ordered())
             {
                 runDataListBuilder.Expect((m) => m.GetEnumerator()).Return(enumerator);
+                enumerator.Expect((m) => m.HasItems()).Return(true);
                 enumerator.Expect((m) => m.HasItems()).Return(true);
                 breaker.Expect((m) => m.IsBreakReceived()).Return(false);
                 executorLauncher.Expect((m) => m.WaitForAnyThreadToComplete());
@@ -266,10 +273,25 @@ namespace ParallelTestRunner.Tests
         }
 
         [TestMethod]
-        public void WriteTrx_NoBrake()
+        public void WriteTrx_NoBrake_NoResults()
         {
             IList<RunData> items = Stub<IList<RunData>>();
-            IList<ResultFile> results = Stub<IList<ResultFile>>();
+            IList<ResultFile> results = new List<ResultFile>();
+            using (Ordered())
+            {
+                breaker.Expect((m) => m.IsBreakReceived()).Return(false);
+                runDataListBuilder.Expect(m => m.GetFull()).Return(items);
+                collector.Expect(m => m.Collect(items)).Return(results);
+            }
+
+            VerifyTarget(() => target.WriteTrx());
+        }
+
+        [TestMethod]
+        public void WriteTrx_NoBrake_HaveResults()
+        {
+            IList<RunData> items = Stub<IList<RunData>>();
+            IList<ResultFile> results = new List<ResultFile>() { new ResultFile() };
             Stream stream = Stub<Stream>();
             using (Ordered())
             {

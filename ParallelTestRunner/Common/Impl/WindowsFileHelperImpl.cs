@@ -48,7 +48,17 @@ namespace ParallelTestRunner.Common.Impl
 
         public Stream OpenResultFile(ITestRunnerArgs args)
         {
-            return CreateFile(string.Concat(args.Root, "\\", args.Output));
+            if (Path.IsPathRooted(args.Output))
+            {
+                return CreateFile(args.Output);
+            }
+
+            return CreateFile(args.Root + "\\" + args.Output);
+        }
+
+        public bool FolderExist(string path)
+        {
+            return Directory.Exists(path);
         }
     }
 }
