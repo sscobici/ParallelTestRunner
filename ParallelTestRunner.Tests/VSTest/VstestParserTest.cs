@@ -38,14 +38,14 @@ namespace ParallelTestRunner.Tests.VSTest
 
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "*", Justification = "Reviewed. Suppression is OK here.")]
     [TestClass]
-    [TestClassGroup("Group2", false)]
+    [TestGroup("Group2", false)]
     public class TestClass1
     {
     }
 
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "*", Justification = "Reviewed. Suppression is OK here.")]
     [TestClass]
-    [TestClassGroup(Name = "Group1", Exclusive = true)]
+    [TestGroup(Name = "Group1", Exclusive = true)]
     public class TestClass2
     {
     }

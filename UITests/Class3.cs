@@ -4,7 +4,7 @@ using System.Threading;
 namespace UITests
 {
     [TestClass]
-    [TestClassGroup("Group1", Exclusive = true)]
+    [TestGroup("Group1", Exclusive = true)]
     public class Class3
     {
         [TestMethod]

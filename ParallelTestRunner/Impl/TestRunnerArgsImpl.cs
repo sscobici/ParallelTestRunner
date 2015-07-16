@@ -11,6 +11,7 @@ namespace ParallelTestRunner.Impl
         {
             Output = "Result.trx";
             ThreadCount = 4;
+            PLevel = PLevel.TestClass;
         }
 
         public string Provider { get; set; }
@@ -22,6 +23,8 @@ namespace ParallelTestRunner.Impl
         public string Root { get; set; }
         
         public string Output { get; set; }
+
+        public PLevel PLevel { get; set; }
 
         public string GetExecutablePath()
         {
@@ -52,6 +55,12 @@ namespace ParallelTestRunner.Impl
             if (string.IsNullOrEmpty(Root))
             {
                 Console.WriteLine("root path is required: root:d:\\work");
+                return false;
+            }
+
+            if (PLevel == PLevel.None)
+            {
+                Console.WriteLine("Level which will be considered parallel is required: plevel:testclass");
                 return false;
             }
 

@@ -64,7 +64,7 @@
     <Compile Include="Common\ThreadFactoryTest.cs" />
     <Compile Include="Common\TrxWriterTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="TestClassGroupAttribute.cs" />
+    <Compile Include="TestGroupAttribute.cs" />
     <Compile Include="VSTest\Common\VstestFileHelperTest.cs" />
     <Compile Include="VSTest\Common\ProcessOutputReaderFactoryTest.cs" />
     <Compile Include="VSTest\Common\ProcessOutputReaderTest.cs" />

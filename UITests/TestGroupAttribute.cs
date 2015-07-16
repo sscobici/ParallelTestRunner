@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParallelTestRunner.Tests
+namespace UITests
 {
-    public class TestClassGroupAttribute : Attribute
+    public class TestGroupAttribute : Attribute
     {
-        public TestClassGroupAttribute()
+        public TestGroupAttribute()
         {
         }
 
-        public TestClassGroupAttribute(string name)
+        public TestGroupAttribute(string name)
         {
             Name = name;
         }
 
-        public TestClassGroupAttribute(string name, bool exclusive)
+        public TestGroupAttribute(string name, bool exclusive)
             : this(name)
         {
             Exclusive = exclusive;

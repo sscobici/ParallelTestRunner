@@ -26,7 +26,7 @@ namespace ParallelTestRunner.VSTest.Impl
             {
                 TestFixture fixture = new TestFixture();
                 fixture.Name = type.FullName;
-                CustomAttributeData groupAttr = type.CustomAttributes.FirstOrDefault(x => x.AttributeType.Name == "TestClassGroupAttribute");
+                CustomAttributeData groupAttr = type.CustomAttributes.FirstOrDefault(x => x.AttributeType.Name == "TestGroupAttribute");
                 if (null != groupAttr)
                 {
                     if (groupAttr.ConstructorArguments.Count > 0)

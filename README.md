@@ -33,18 +33,18 @@ There is a possibility to group several TestClasses in order to execute them con
 
 Create the following Attribute in your test project:
 ```
-    public class TestClassGroupAttribute : Attribute
+    public class TestGroupAttribute : Attribute
     {
-        public TestClassGroupAttribute()
+        public TestGroupAttribute()
         {
         }
 
-        public TestClassGroupAttribute(string name)
+        public TestGroupAttribute(string name)
         {
             Name = name;
         }
 
-        public TestClassGroupAttribute(string name, bool exclusive)
+        public TestGroupAttribute(string name, bool exclusive)
             : this(name)
         {
             Exclusive = exclusive;
@@ -59,20 +59,20 @@ Create the following Attribute in your test project:
 In the below example two groups are defined to be executed in parallel. ClassA and ClassB tests will be executed consecutively.
 
 ```
-[TestClassGroup("FirstGroup")]
+[TestGroup("FirstGroup")]
 ClassA { ... }
 
-[TestClassGroup("FirstGroup")]
+[TestGroup("FirstGroup")]
 ClassB { ... }
 
-[TestClassGroup("SecondGroup")]
+[TestGroup("SecondGroup")]
 ClassC { ... }
 ```
 
 Specify attribute parameter Exclusive = true if there is a need to run some tests exclusively. This will ensure that no other tests are run in parallel at that time.
 
 ```
-[TestClassGroup("ExclusiveGroup", Exclusive = true)]
+[TestGroup("ExclusiveGroup", Exclusive = true)]
 ClassExclusive { ... }
 ```
 

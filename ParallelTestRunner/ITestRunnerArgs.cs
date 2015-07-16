@@ -15,6 +15,8 @@ namespace ParallelTestRunner
         
         string Output { get; }
 
+        PLevel PLevel { get; }
+
         string GetExecutablePath();
 
         bool IsValid();

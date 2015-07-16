@@ -87,6 +87,7 @@
     <Compile Include="Common\IRunDataEnumerator.cs" />
     <Compile Include="ITestRunner.cs" />
     <Compile Include="ITestRunnerArgs.cs" />
+    <Compile Include="PLevel.cs" />
     <Compile Include="VSTest\Common\Impl\ProcessOutputReaderImpl.cs" />
     <Compile Include="VSTest\Common\Impl\ProcessOutputReaderFactoryImpl.cs" />
     <Compile Include="VSTest\Common\IProcessOutputReader.cs" />
