@@ -1,0 +1,10 @@
+*.DotSettings.user
+*/obj
+*/bin
+*StyleCop.Cache
+*csproj.user
+OpenCover
+packages/Autofac*
+packages/RhinoMocks*
+packages/StyleCop.MSBuild*
+*.suo
