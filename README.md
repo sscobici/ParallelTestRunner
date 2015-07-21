@@ -1,5 +1,7 @@
 # ParallelTestRunner
-Parallel test runner for Visual Studio tests
+Parallel test runner for Visual Studio tests.<br>
+It allows you to control how your tests are executed in parallel by providing different options and TestGroupAttribute (see Additional Info).<br><br>
+For simple Visual Studio parallel tests run you can use this [suggestion](http://stackoverflow.com/questions/3917060/how-to-run-unit-tests-mstest-in-parallel/17820520#17820520).
 
 # Description
 Allows parallel run of Visual Studio tests from the command line. Primary usage is to speed up slow tests (for ex Selenium UI tests) during Continuous Integration process. It is possible for example to write [Selenium](http://www.seleniumhq.org/) UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and [Selenium Grid](http://www.seleniumhq.org/projects/grid/). Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] or [TestMethod] in each of them. The tool generates result.trx file by merging all test results.
