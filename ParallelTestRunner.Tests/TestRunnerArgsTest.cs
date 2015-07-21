@@ -81,5 +81,13 @@ namespace ParallelTestRunner.Tests
             valid = target.IsValid();
             Assert.IsFalse(valid);
         }
+
+        [TestMethod]
+        public void IsValid_NOPLEVEL()
+        {
+            target.PLevel = PLevel.None;
+            bool valid = target.IsValid();
+            Assert.IsFalse(valid);
+        }
     }
 }

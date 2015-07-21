@@ -10,6 +10,7 @@ namespace ParallelTestRunner.Common.Impl
         {
             DateTime startTime = DateTime.Now;
             DateTime finishTime = DateTime.MinValue;
+            string name = string.Empty;
             ResultSummary summary = new ResultSummary();
             foreach (ResultFile file in files)
             {
@@ -17,6 +18,8 @@ namespace ParallelTestRunner.Common.Impl
                 {
                     summary.Outcome = file.Summary.Outcome;
                 }
+
+                summary.RunUser = file.Summary.RunUser;
 
                 summary.Total += file.Summary.Total;
                 summary.Executed += file.Summary.Executed;
@@ -44,10 +47,17 @@ namespace ParallelTestRunner.Common.Impl
                 {
                     finishTime = file.Summary.FinishTime;
                 }
+
+                if (name == string.Empty || string.CompareOrdinal(name, file.Summary.Name) > 0)
+                {
+                    name = file.Summary.Name;
+                }
             }
 
             summary.StartTime = startTime;
             summary.FinishTime = finishTime;
+            summary.Name = name;
+
             return summary;
         }
     }

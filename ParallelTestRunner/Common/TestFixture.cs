@@ -8,6 +8,6 @@ namespace ParallelTestRunner.Common
         
         public string Group { get; set; }
         
-        public bool Exclusive { get; set; }
+        public bool? Exclusive { get; set; }
     }
 }

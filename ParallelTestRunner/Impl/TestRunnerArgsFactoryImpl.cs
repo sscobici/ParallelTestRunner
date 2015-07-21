@@ -37,7 +37,7 @@ namespace ParallelTestRunner.Impl
                 else if (item.StartsWith("plevel:", StringComparison.InvariantCultureIgnoreCase))
                 {
                     PLevel result;
-                    if (Enum.TryParse<PLevel>(item.Remove(0, 7), false, out result))
+                    if (Enum.TryParse<PLevel>(item.Remove(0, 7), true, out result))
                     {
                         data.PLevel = result;
                     }

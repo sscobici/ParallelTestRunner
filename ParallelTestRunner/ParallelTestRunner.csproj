@@ -53,9 +53,11 @@
     <Compile Include="Autofac\AutofacContainer.cs" />
     <Compile Include="Common\IExecutorThread.cs" />
     <Compile Include="Common\Impl\ExecutorThreadImpl.cs" />
+    <Compile Include="Common\Impl\StopwatchImpl.cs" />
     <Compile Include="Common\Impl\SummaryCalculatorImpl.cs" />
     <Compile Include="Common\Impl\ThreadFactoryImpl.cs" />
     <Compile Include="Common\Impl\WindowsFileHelperImpl.cs" />
+    <Compile Include="Common\IStopwatch.cs" />
     <Compile Include="Common\ISummaryCalculator.cs" />
     <Compile Include="Common\IThreadFactory.cs" />
     <Compile Include="Common\IWindowsFileHelper.cs" />

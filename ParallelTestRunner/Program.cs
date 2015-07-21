@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using ParallelTestRunner.Autofac;
 using ParallelTestRunner.Impl;
 using System.Reflection;
+using ParallelTestRunner.Common;
 
 namespace ParallelTestRunner
 {
@@ -26,6 +27,9 @@ namespace ParallelTestRunner
             Console.WriteLine("Starting test execution, please wait...");
 
             IContainer container = AutofacContainer.RegisterTypes(testArgs);
+
+            container.Resolve<IStopwatch>().Start();
+
             using (container.BeginLifetimeScope())
             {
                 ITestRunner testRunner = container.Resolve<ITestRunner>();

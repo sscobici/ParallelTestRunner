@@ -21,9 +21,14 @@ namespace ParallelTestRunner.Common.Impl
         
         public ISummaryCalculator SummaryCalculator { get; set; }
 
+        public IStopwatch Stopwatch { get; set; }
+
         public void WriteFile(IList<ResultFile> files, Stream stream)
         {
             ResultSummary summary = SummaryCalculator.Calculate(files);
+            
+            Stopwatch.Stop();
+
             using (var writer = CreateDocument(stream))
             {
                 WriteBody(writer, summary, files);
@@ -34,6 +39,7 @@ namespace ParallelTestRunner.Common.Impl
                 WriteSummaryAndEnd(writer, summary, files);
             }
 
+            Console.WriteLine();
             Console.WriteLine("Total tests: {0}. Passed: {1}. Failed: {2}. Skipped: {3}.", summary.Total, summary.Passed, summary.Failed, summary.Total - summary.Passed - summary.Failed);
             if (summary.Failed == 0)
             {
@@ -46,8 +52,7 @@ namespace ParallelTestRunner.Common.Impl
                 Console.ResetColor();
             }
 
-            TimeSpan duration = summary.FinishTime - summary.StartTime;
-            Console.WriteLine("Test execution time: {0}", GetReadableTimeSpan(duration));
+            Console.WriteLine("Test execution time: {0}", GetReadableTimeSpan(Stopwatch.Elapsed()));
         }
 
         public Stream OpenResultFile(ITestRunnerArgs args)
@@ -117,14 +122,17 @@ namespace ParallelTestRunner.Common.Impl
             // Start TestRun Element
             writer.WriteStartElement("TestRun", XmlNamespace);
             writer.WriteAttributeString("id", Guid.NewGuid().ToString());
-            writer.WriteAttributeString("name", string.Empty);
+            writer.WriteAttributeString("name", summary.Name);
+            writer.WriteAttributeString("runUser", summary.RunUser);
+
+            string dateTimeFormat = "o";
 
             // Start Times Element
             writer.WriteStartElement("Times");
-            writer.WriteAttributeString("creation", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
-            writer.WriteAttributeString("queuing", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
-            writer.WriteAttributeString("start", summary.StartTime.ToString(CultureInfo.InvariantCulture));
-            writer.WriteAttributeString("finish", summary.FinishTime.ToString(CultureInfo.InvariantCulture));
+            writer.WriteAttributeString("creation", Stopwatch.GetStartDateTime().ToLocalTime().ToString(dateTimeFormat));
+            writer.WriteAttributeString("queuing", Stopwatch.GetStartDateTime().ToLocalTime().ToString(dateTimeFormat));
+            writer.WriteAttributeString("start", Stopwatch.GetStartDateTime().ToLocalTime().ToString(dateTimeFormat));
+            writer.WriteAttributeString("finish", Stopwatch.GetStopDateTime().ToLocalTime().ToString(dateTimeFormat));
             writer.WriteEndElement(); // Times
 
             // Start TestSettings Element
@@ -196,7 +204,7 @@ namespace ParallelTestRunner.Common.Impl
                 {
                     writer.WriteStartElement("TestEntry");
                     writer.WriteAttributeString("testId", result.TestId.ToString());
-                    writer.WriteAttributeString("executionId", result.TestId.ToString());
+                    writer.WriteAttributeString("executionId", result.ExecutionId.ToString());
                     writer.WriteAttributeString("testListId", result.TestListId.ToString());
                     writer.WriteEndElement(); // TestEntry
                 }
@@ -227,7 +235,7 @@ namespace ParallelTestRunner.Common.Impl
                 foreach (TestResult result in trxFile.Results)
                 {
                     writer.WriteStartElement("UnitTestResult");
-                    writer.WriteAttributeString("executionId", result.TestId.ToString());
+                    writer.WriteAttributeString("executionId", result.ExecutionId.ToString());
                     writer.WriteAttributeString("testId", result.TestId.ToString());
                     writer.WriteAttributeString("testName", result.TestName);
                     writer.WriteAttributeString("computerName", result.ComputerName);
@@ -272,7 +280,7 @@ namespace ParallelTestRunner.Common.Impl
                     writer.WriteAttributeString("storage", result.Storage);
                     writer.WriteAttributeString("id", result.TestId.ToString());
                     writer.WriteStartElement("Execution");
-                    writer.WriteAttributeString("id", result.TestId.ToString());
+                    writer.WriteAttributeString("id", result.ExecutionId.ToString());
                     writer.WriteEndElement(); // Execution
                     writer.WriteStartElement("TestMethod");
                     writer.WriteAttributeString("codeBase", result.CodeBase);

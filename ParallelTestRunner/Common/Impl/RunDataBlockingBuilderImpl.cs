@@ -10,7 +10,9 @@ namespace ParallelTestRunner.Common.Impl
     /// </summary>
     public class RunDataBlockingBuilderImpl : IRunDataBuilder
     {
-        public IList<RunData> Create(TestAssembly assembly, ITestRunnerArgs args)
+        public ITestRunnerArgs Args { get; set; }
+
+        public IList<RunData> Create(TestAssembly assembly)
         {
             IList<RunData> items = new List<RunData>();
             assembly.Fixtures = assembly.Fixtures.OrderBy((m) => m.Name).ToList();
@@ -22,7 +24,7 @@ namespace ParallelTestRunner.Common.Impl
                 {
                     item.Groups.Add(fixture.Group);
                     item.Fixtures.Add(fixture);
-                    if (fixture.Exclusive)
+                    if (fixture.Exclusive == true)
                     {
                         item.Exclusive = true;
                     }
@@ -30,7 +32,7 @@ namespace ParallelTestRunner.Common.Impl
                     continue;
                 }
 
-                item = CreateNewFromFixture(assembly, fixture, args);
+                item = CreateNewFromFixture(assembly, fixture);
                 lastFixtureName = fixture.Name;
                 items.Add(item);
             }
@@ -38,16 +40,16 @@ namespace ParallelTestRunner.Common.Impl
             return items;
         }
 
-        private RunData CreateNewFromFixture(TestAssembly testAssembly, TestFixture fixture, ITestRunnerArgs args)
+        private RunData CreateNewFromFixture(TestAssembly testAssembly, TestFixture fixture)
         {
             RunData item = new RunData()
             {
                 Fixtures = new List<TestFixture>() { fixture },
-                Root = args.Root,
+                Root = Args.Root,
                 Output = new StringBuilder(),
                 Groups = new HashSet<string>(),
-                Exclusive = fixture.Exclusive,
-                Executable = args.GetExecutablePath(),
+                Exclusive = fixture.Exclusive ?? false,
+                Executable = Args.GetExecutablePath(),
                 RunId = Guid.NewGuid(),
                 AssemblyName = testAssembly.Name
             };

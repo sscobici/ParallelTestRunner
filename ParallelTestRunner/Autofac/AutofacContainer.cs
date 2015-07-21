@@ -15,6 +15,8 @@ namespace ParallelTestRunner.Autofac
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance(testArgs).As<ITestRunnerArgs>().SingleInstance();
+
+            builder.RegisterType<StopwatchImpl>().As<IStopwatch>().SingleInstance();
             builder.RegisterType<TestRunnerImpl>().As<ITestRunner>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<TrxWriter>().As<ITrxWriter>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<BreakerImpl>().As<IBreaker>().SingleInstance().PropertiesAutowired();

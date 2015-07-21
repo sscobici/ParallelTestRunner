@@ -4,6 +4,8 @@ namespace ParallelTestRunner.Common.Trx
 {
     public class TestResult
     {
+        public Guid ExecutionId { get; set; }
+
         public Guid TestId { get; set; }
 
         public Guid TestListId { get; set; }

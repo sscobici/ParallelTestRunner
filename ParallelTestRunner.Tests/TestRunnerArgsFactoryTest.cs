@@ -55,6 +55,14 @@ namespace ParallelTestRunner.Tests
         }
 
         [TestMethod]
+        public void ParseArgs_PLevel()
+        {
+            string[] input = new string[] { "cab.dll", "plevel:testmethod" };
+            ITestRunnerArgs args = target.ParseArgs(input);
+            Assert.AreEqual(PLevel.TestMethod, args.PLevel);
+        }
+
+        [TestMethod]
         public void ParseArgs_AssemblyList()
         {
             string[] input = new string[] { "cab.dll", "abc.dll", "ccb.dll" };

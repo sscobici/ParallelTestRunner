@@ -19,7 +19,10 @@ namespace ParallelTestRunner.Tests.Common
         public void SetUp()
         {
             args = Stub<ITestRunnerArgs>();
-            target = new RunDataBlockingBuilderImpl();
+            target = new RunDataBlockingBuilderImpl()
+            {
+                Args = args
+            };
             assembly = new TestAssembly()
             {
                 Name = "THE_ASSEMBLY_PATH",
@@ -43,7 +46,7 @@ namespace ParallelTestRunner.Tests.Common
             args.Expect((m) => m.GetExecutablePath()).Return("PATH.EXE").Repeat.AtLeastOnce();
             args.Expect((m) => m.Root).Return("ROOT").Repeat.AtLeastOnce();
 
-            IList<RunData> actual = VerifyTarget(() => target.Create(assembly, args));
+            IList<RunData> actual = VerifyTarget(() => target.Create(assembly));
             Assert.IsNotNull(actual);
             Assert.AreEqual(4, actual.Count);
 

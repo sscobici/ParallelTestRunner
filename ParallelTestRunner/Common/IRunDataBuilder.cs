@@ -5,6 +5,6 @@ namespace ParallelTestRunner.Common
 {
     public interface IRunDataBuilder
     {
-        IList<RunData> Create(TestAssembly assembly, ITestRunnerArgs args);
+        IList<RunData> Create(TestAssembly assembly);
     }
 }

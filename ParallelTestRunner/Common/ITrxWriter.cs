@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ParallelTestRunner.Common.Trx;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using ParallelTestRunner.Common.Trx;
 
 namespace ParallelTestRunner.Common
 {

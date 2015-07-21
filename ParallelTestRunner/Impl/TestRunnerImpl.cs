@@ -40,7 +40,7 @@ namespace ParallelTestRunner.Impl
             {
                 Assembly assembly = WindowsFileHelper.GetAssembly(assemblyPath);
                 TestAssembly testAssembly = Parser.Parse(assembly);
-                IList<RunData> items = RunDataBuilder.Create(testAssembly, Args);
+                IList<RunData> items = RunDataBuilder.Create(testAssembly);
                 RunDataListBuilder.Add(items);
             }
         }

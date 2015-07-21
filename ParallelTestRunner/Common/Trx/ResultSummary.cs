@@ -38,6 +38,10 @@ namespace ParallelTestRunner.Common.Trx
 
         public int Pending { get; set; }
 
+        public string Name { get; set; }
+
+        public string RunUser { get; set; }
+
         public DateTime StartTime { get; set; }
 
         public DateTime FinishTime { get; set; }

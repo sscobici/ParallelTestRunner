@@ -16,6 +16,7 @@ namespace ParallelTestRunner.VSTest.Impl
 
             using (XmlReader reader = XmlReader.Create(stream))
             {
+                ExtractTestRunInfo(reader, trx);
                 ExtractTimes(reader, trx);
                 ExtractTestSettings(reader, trx);
                 ExtractResults(reader, trx);
@@ -24,6 +25,15 @@ namespace ParallelTestRunner.VSTest.Impl
             }
 
             return trx;
+        }
+
+        private void ExtractTestRunInfo(XmlReader reader, ResultFile trx)
+        {
+            if (reader.ReadToFollowing("TestRun"))
+            {
+                trx.Summary.Name = reader.GetAttribute("name");
+                trx.Summary.RunUser = reader.GetAttribute("runUser");
+            }
         }
 
         private void ExtractTimes(XmlReader reader, ResultFile trx)
@@ -90,6 +100,7 @@ namespace ParallelTestRunner.VSTest.Impl
                     do
                     {
                         TestResult item = new TestResult();
+                        item.ExecutionId = Guid.Parse(reader.GetAttribute("executionId"));
                         item.TestId = Guid.Parse(reader.GetAttribute("testId"));
                         item.TestName = reader.GetAttribute("testName");
                         item.Duration = reader.GetAttribute("duration");

@@ -252,12 +252,12 @@ namespace ParallelTestRunner.Tests
 
                 windowsFileHelper.Expect((m) => m.GetAssembly(assemblyList[0])).Return(assemblyAbc);
                 parser.Expect((m) => m.Parse(assemblyAbc)).Return(testAssemblyAbc);
-                runDataBuilder.Expect(m => m.Create(testAssemblyAbc, args)).Return(itemsAbc);
+                runDataBuilder.Expect(m => m.Create(testAssemblyAbc)).Return(itemsAbc);
                 runDataListBuilder.Expect(m => m.Add(itemsAbc));
 
                 windowsFileHelper.Expect((m) => m.GetAssembly(assemblyList[1])).Return(assemblyAbb);
                 parser.Expect((m) => m.Parse(assemblyAbb)).Return(testAssemblyAbb);
-                runDataBuilder.Expect(m => m.Create(testAssemblyAbb, args)).Return(itemsAbb);
+                runDataBuilder.Expect(m => m.Create(testAssemblyAbb)).Return(itemsAbb);
                 runDataListBuilder.Expect(m => m.Add(itemsAbb));
             }
 
