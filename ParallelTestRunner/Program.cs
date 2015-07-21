@@ -60,7 +60,7 @@ namespace ParallelTestRunner
             Console.WriteLine("provider:");
             Console.WriteLine("\tSpecifies provider name");
             Console.WriteLine("\tExamples: provider:VSTEST_2012");
-            Console.WriteLine("\t\t  provider:VSTEST_2010");
+            Console.WriteLine("\t\t  provider:VSTEST_2013");
             Console.WriteLine();
             Console.WriteLine("threadcount:");
             Console.WriteLine("\tinteger - specifies number of concurrent threads, defaut is 4");
@@ -74,6 +74,11 @@ namespace ParallelTestRunner
             Console.WriteLine("out:");
             Console.WriteLine("\tspecifies result file name, default is Result.trx");
             Console.WriteLine("\tExamples: out:Result.trx");
+            Console.WriteLine();
+            Console.WriteLine("plevel:");
+            Console.WriteLine("\tspecifies what should be run parallel");
+            Console.WriteLine("\tExamples: plevel:testclass");
+            Console.WriteLine("\t\t  plevel:testmethod");
         }
     }
 }

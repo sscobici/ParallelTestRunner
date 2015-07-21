@@ -2,36 +2,41 @@
 Parallel test runner for Visual Studio tests
 
 # Description
-Allows parallel run of Visual Studio tests from the command line. Primary usage is to speed up slow tests during Continuous Integration process. It is possible for example to write [Selenium](http://www.seleniumhq.org/) UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and [Selenium Grid](http://www.seleniumhq.org/projects/grid/). Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] in each of them. The tool generates result.trx file by merging all test classes results.
+Allows parallel run of Visual Studio tests from the command line. Primary usage is to speed up slow tests (for ex Selenium UI tests) during Continuous Integration process. It is possible for example to write [Selenium](http://www.seleniumhq.org/) UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and [Selenium Grid](http://www.seleniumhq.org/projects/grid/). Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] or [TestMethod] in each of them. The tool generates result.trx file by merging all test results.
 
 # Usage
 ```
 ParallelTestRunner.exe [options] [assembly]...
 
 Options:
-  provider:        specifies which version of VSTest.Console.exe to use: VSTEST_2012, VSTEST_2013
+  provider:        specifies which version of VSTest.Console.exe to use: VSTEST_2012, VSTEST_2013, ...
   threadcount:     specifies the number of parallel processes, default is 4
   root:            the working directory where the temporary files will be generated
   out:             resulting trx file, can be absolute path or relative to the working directory
+  plevel:          specifies what should be run in parallel: TestClass, TestMethod. Default is TestClass
   
-assembly           the list of assemblies that contain visual studio tests
+assembly           the list of assemblies which contain visual studio tests
 
 Examples:
-  ParallelTestRunner.exe provider:VSTEST_2013 threadcount:10 root:./TestResults out:result.trx ./UITests/SeleniumIntegration.Tests.dll
+  ParallelTestRunner.exe ./UITests/SeleniumUI.Tests.dll
+  ParallelTestRunner.exe provider:VSTEST_2013 threadcount:10 root:./TestResults out:result.trx plevel:TestMethod ./UITests/SeleniumIntegration.Tests.dll
 ```
 
 # Download
 See [releases](https://github.com/sscobici/ParallelTestRunner/releases).
 Build was created with the help of [AppVeyor](https://ci.appveyor.com/project/sscobici/paralleltestrunner) Continuous Integration tool
 
+# Changelog
+See [Changelog](https://github.com/sscobici/ParallelTestRunner/blob/master/CHANGELOG)
+
 # Issues
 Feel free to open an [issue](https://github.com/sscobici/ParallelTestRunner/issues) if the tool needs to be enhanced or you have found a bug 
 
 # Additional Information
-By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively.
-There is a possibility to group several TestClasses in order to execute them consecutively.
+By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively unless you specify plevel:TestMethod option
+There is a possibility to group several TestClasses or TestMethods in order to execute them consecutively.
 
-Create the following Attribute in your test project:
+Create the following class in your test project and apply it to test class or method:
 ```
     public class TestGroupAttribute : Attribute
     {
