@@ -127,9 +127,13 @@ namespace ParallelTestRunner.Tests.Common
         public void WriteFile()
         {
             Stream stream = new MemoryStream();
-            target.WriteFile(files, stream);
+            bool haveFailedTests = target.WriteFile(files, stream);
+
+            Assert.IsTrue(haveFailedTests);
+
             stream.Position = 0;
             ResultFile result = parser.Parse(stream);
+
             Assert.AreEqual(111, result.Summary.Total);
             Assert.AreEqual(222, result.Summary.Executed);
             Assert.AreEqual(333, result.Summary.Passed);

@@ -1,0 +1,7 @@
+1.1
+	- Add possibility to run TestMethod in parallel, /plevel:testmethod option
+	- Several fixes to trx result file
+	- Calculate total tests duration instead of extracting it from trxs, vstest 2013 doesn't write correct times in trx files
+	- Return error code on exit to be able to integrate in CI pipeline
+1.0
+	- Initial release.

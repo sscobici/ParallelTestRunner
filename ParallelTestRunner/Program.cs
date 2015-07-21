@@ -12,7 +12,7 @@ namespace ParallelTestRunner
     {
         private static ITestRunnerArgsFactory argsFactory = new TestRunnerArgsFactoryImpl();
 
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
             Console.WriteLine("Parallel Test Execution Command Line Tool Version " + Assembly.GetCallingAssembly().GetName().Version.ToString());
             Console.WriteLine();
@@ -21,7 +21,7 @@ namespace ParallelTestRunner
             if (!testArgs.IsValid())
             {
                 PrintHelp();
-                return;
+                return 1;
             }
 
             Console.WriteLine("Starting test execution, please wait...");
@@ -29,7 +29,7 @@ namespace ParallelTestRunner
             IContainer container = AutofacContainer.RegisterTypes(testArgs);
 
             container.Resolve<IStopwatch>().Start();
-
+            int resultCode = 2;
             using (container.BeginLifetimeScope())
             {
                 ITestRunner testRunner = container.Resolve<ITestRunner>();
@@ -37,7 +37,10 @@ namespace ParallelTestRunner
                 testRunner.Execute();
                 testRunner.WriteTrx();
                 testRunner.Clean();
+                resultCode = testRunner.ResultCode;
             }
+
+            return resultCode;
         }
 
         private static void PrintHelp()

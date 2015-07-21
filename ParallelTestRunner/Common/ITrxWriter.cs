@@ -7,7 +7,7 @@ namespace ParallelTestRunner.Common
 {
     public interface ITrxWriter
     {
-        void WriteFile(IList<ResultFile> files, Stream stream);
+        bool WriteFile(IList<ResultFile> files, Stream stream);
 
         Stream OpenResultFile(ITestRunnerArgs args);
     }

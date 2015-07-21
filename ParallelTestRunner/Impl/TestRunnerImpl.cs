@@ -9,6 +9,8 @@ namespace ParallelTestRunner.Impl
 {
     public class TestRunnerImpl : ITestRunner
     {
+        public int ResultCode { get; set; }
+
         public ITestRunnerArgs Args { get; set; }
         
         public IParser Parser { get; set; }
@@ -117,7 +119,10 @@ namespace ParallelTestRunner.Impl
             using (Stream stream = TrxWriter.OpenResultFile(Args))
             {
                 // Console.WriteLine("Results File: " + Args.Root + "\\" + Args.Output);
-                TrxWriter.WriteFile(results, stream);
+                if (TrxWriter.WriteFile(results, stream) == false)
+                {
+                    ResultCode = 3;
+                }
             }
         }
 

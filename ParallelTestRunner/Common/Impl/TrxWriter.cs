@@ -23,7 +23,7 @@ namespace ParallelTestRunner.Common.Impl
 
         public IStopwatch Stopwatch { get; set; }
 
-        public void WriteFile(IList<ResultFile> files, Stream stream)
+        public bool WriteFile(IList<ResultFile> files, Stream stream)
         {
             ResultSummary summary = SummaryCalculator.Calculate(files);
             
@@ -43,7 +43,9 @@ namespace ParallelTestRunner.Common.Impl
             Console.WriteLine("Total tests: {0}. Passed: {1}. Failed: {2}. Skipped: {3}.", summary.Total, summary.Passed, summary.Failed, summary.Total - summary.Passed - summary.Failed);
             if (summary.Failed == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Test Run Succeded.");
+                Console.ResetColor();
             }
             else
             {
@@ -53,6 +55,8 @@ namespace ParallelTestRunner.Common.Impl
             }
 
             Console.WriteLine("Test execution time: {0}", GetReadableTimeSpan(Stopwatch.Elapsed()));
+
+            return summary.Failed == 0;
         }
 
         public Stream OpenResultFile(ITestRunnerArgs args)

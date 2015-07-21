@@ -270,6 +270,7 @@ namespace ParallelTestRunner.Tests
             breaker.Expect((m) => m.IsBreakReceived()).Return(true);
 
             VerifyTarget(() => target.WriteTrx());
+            Assert.AreEqual(0, target.ResultCode);
         }
 
         [TestMethod]
@@ -285,6 +286,7 @@ namespace ParallelTestRunner.Tests
             }
 
             VerifyTarget(() => target.WriteTrx());
+            Assert.AreEqual(0, target.ResultCode);
         }
 
         [TestMethod]
@@ -299,10 +301,30 @@ namespace ParallelTestRunner.Tests
                 runDataListBuilder.Expect(m => m.GetFull()).Return(items);
                 collector.Expect(m => m.Collect(items)).Return(results);
                 trxWriter.Expect(m => m.OpenResultFile(args)).Return(stream);
-                trxWriter.Expect(m => m.WriteFile(results, stream));
+                trxWriter.Expect(m => m.WriteFile(results, stream)).Return(true);
             }
 
             VerifyTarget(() => target.WriteTrx());
+            Assert.AreEqual(0, target.ResultCode);
+        }
+
+        [TestMethod]
+        public void WriteTrx_NoBrake_HaveFailedTests()
+        {
+            IList<RunData> items = Stub<IList<RunData>>();
+            IList<ResultFile> results = new List<ResultFile>() { new ResultFile() };
+            Stream stream = Stub<Stream>();
+            using (Ordered())
+            {
+                breaker.Expect((m) => m.IsBreakReceived()).Return(false);
+                runDataListBuilder.Expect(m => m.GetFull()).Return(items);
+                collector.Expect(m => m.Collect(items)).Return(results);
+                trxWriter.Expect(m => m.OpenResultFile(args)).Return(stream);
+                trxWriter.Expect(m => m.WriteFile(results, stream)).Return(false);
+            }
+
+            VerifyTarget(() => target.WriteTrx());
+            Assert.AreEqual(3, target.ResultCode);
         }
 
         [TestMethod]
