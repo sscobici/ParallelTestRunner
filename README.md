@@ -1,6 +1,5 @@
 # ParallelTestRunner
-Parallel test runner for Visual Studio tests.<br>
-It allows you to control how your tests are executed in parallel by providing different options and TestGroupAttribute (see Additional Info).<br><br>
+Parallel test runner for Visual Studio tests. It allows you to control how your tests are executed in parallel by providing different options and TestGroupAttribute (see Additional Info).<br><br>
 For simple Visual Studio parallel tests run you can use this [suggestion](http://stackoverflow.com/questions/3917060/how-to-run-unit-tests-mstest-in-parallel/17820520#17820520).
 
 # Description
