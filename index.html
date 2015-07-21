@@ -33,7 +33,11 @@
           <h1>
 <a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h1>
 
-<p>Allows parallel run of Visual Studio tests from the command line. Primary usage is to speed up slow tests during Continuous Integration process. It is possible for example to write <a href="http://www.seleniumhq.org/">Selenium</a> UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and <a href="http://www.seleniumhq.org/projects/grid/">Selenium Grid</a>. Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] or [TestMethod] in each of them. The tool generates result.trx file by merging all test results.</p>
+<p>Parallel test runner for Visual Studio tests. It allows to control how the tests are executed in parallel by providing different options and TestGroupAttribute (see Additional Info).<br><br>
+
+For simple Visual Studio parallel tests run you can use this <a href="http://stackoverflow.com/questions/3917060/how-to-run-unit-tests-mstest-in-parallel/17820520#17820520">suggestion</a>.<br><br>
+
+Primary usage is to speed up slow tests during Continuous Integration process. It is possible for example to write <a href="http://www.seleniumhq.org/">Selenium</a> UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and <a href="http://www.seleniumhq.org/projects/grid/">Selenium Grid</a>. Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] or [TestMethod] in each of them. The tool generates result.trx file by merging all test results.</p>
 
 <h1>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
