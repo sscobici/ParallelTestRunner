@@ -18,8 +18,8 @@ Options:
 assembly           the list of assemblies which contain visual studio tests
 
 Examples:
-  ParallelTestRunner.exe ./UITests/SeleniumUI.Tests.dll
-  ParallelTestRunner.exe provider:VSTEST_2013 threadcount:10 root:./TestResults out:result.trx plevel:TestMethod ./UITests/SeleniumIntegration.Tests.dll
+  ParallelTestRunner.exe provider:VSTEST_2013 root:TestResults ./UITests/SeleniumUI.Tests.dll
+  ParallelTestRunner.exe provider:VSTEST_2013 root:TestResults threadcount:10 out:result.trx plevel:TestMethod ./UITests/SeleniumIntegration.Tests.dll
 ```
 
 # Download
