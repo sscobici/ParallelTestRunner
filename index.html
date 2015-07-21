@@ -10,7 +10,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>ParallelTestRunner v1.0</title>
+    <title>ParallelTestRunner v1.1</title>
   </head>
 
   <body>
@@ -33,7 +33,7 @@
           <h1>
 <a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h1>
 
-<p>Allows parallel run of Visual Studio tests from the command line. Primary usage is to speed up slow tests during Continuous Integration process. It is possible for example to write <a href="http://www.seleniumhq.org/">Selenium</a> UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and <a href="http://www.seleniumhq.org/projects/grid/">Selenium Grid</a>. Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] in each of them. The tool generates result.trx file by merging all test classes results.</p>
+<p>Allows parallel run of Visual Studio tests from the command line. Primary usage is to speed up slow tests during Continuous Integration process. It is possible for example to write <a href="http://www.seleniumhq.org/">Selenium</a> UI tests using Visual Studio testing framework and scale them by using ParallelTestRunner and <a href="http://www.seleniumhq.org/projects/grid/">Selenium Grid</a>. Basically this tool runs several Visual Studio VSTest.Console.exe processes and executes one [TestClass] or [TestMethod] in each of them. The tool generates result.trx file by merging all test results.</p>
 
 <h1>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
@@ -41,12 +41,13 @@
 <pre><code>ParallelTestRunner.exe [options] [assembly]...
 
 Options:
-  provider:        specifies which version of VSTest.Console.exe to use: VSTEST_2012, VSTEST_2013
+  provider:        specifies which version of VSTest.Console.exe to use: VSTEST_2012, VSTEST_2013, ...
   threadcount:     specifies the number of parallel processes, default is 4
   root:            the working directory where the temporary files will be generated
   out:             resulting trx file, can be absolute path or relative to the working directory
+  plevel:          specifies what should be run in parallel: TestClass, TestMethod. Default is TestClass
 
-assembly           the list of assemblies that contain visual studio tests
+assembly           the list of assemblies which contain visual studio tests
 
 Examples:
   ParallelTestRunner.exe provider:VSTEST_2013 threadcount:10 root:./TestResults out:result.trx ./UITests/SeleniumIntegration.Tests.dll
@@ -59,6 +60,11 @@ Examples:
 Build was created with the help of <a href="https://ci.appveyor.com/project/sscobici/paralleltestrunner">AppVeyor</a> Continuous Integration tool</p>
 
 <h1>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h1>
+
+<p>See <a href="https://github.com/sscobici/ParallelTestRunner/blob/master/CHANGELOG">Changelog</a>.</p>
+
+<h1>
 <a id="issues" class="anchor" href="#issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Issues</h1>
 
 <p>Feel free to open an <a href="https://github.com/sscobici/ParallelTestRunner/issues">issue</a> if the tool needs to be enhanced or you have found a bug </p>
@@ -66,23 +72,23 @@ Build was created with the help of <a href="https://ci.appveyor.com/project/ssco
 <h1>
 <a id="additional-information" class="anchor" href="#additional-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional Information</h1>
 
-<p>By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively.
-There is a possibility to group several TestClasses in order to execute them consecutively.</p>
+<p>By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively unless you specify plevel:TestMethod option
+There is a possibility to group several TestClasses or TestMethods in order to execute them consecutively.</p>
 
-<p>Create the following Attribute in your test project:</p>
+<p>Create the following class in your test project and apply it to the test class or method:</p>
 
-<pre><code>    public class TestClassGroupAttribute : Attribute
+<pre><code>    public class TestGroupAttribute : Attribute
     {
-        public TestClassGroupAttribute()
+        public TestGroupAttribute()
         {
         }
 
-        public TestClassGroupAttribute(string name)
+        public TestGroupAttribute(string name)
         {
             Name = name;
         }
 
-        public TestClassGroupAttribute(string name, bool exclusive)
+        public TestGroupAttribute(string name, bool exclusive)
             : this(name)
         {
             Exclusive = exclusive;
@@ -96,19 +102,19 @@ There is a possibility to group several TestClasses in order to execute them con
 
 <p>In the below example two groups are defined to be executed in parallel. ClassA and ClassB tests will be executed consecutively.</p>
 
-<pre><code>[TestClassGroup("FirstGroup")]
+<pre><code>[TestGroup("FirstGroup")]
 ClassA { ... }
 
-[TestClassGroup("FirstGroup")]
+[TestGroup("FirstGroup")]
 ClassB { ... }
 
-[TestClassGroup("SecondGroup")]
+[TestGroup("SecondGroup")]
 ClassC { ... }
 </code></pre>
 
 <p>Specify attribute parameter Exclusive = true if there is a need to run some tests exclusively. This will ensure that no other tests are run in parallel at that time.</p>
 
-<pre><code>[TestClassGroup("ExclusiveGroup", Exclusive = true)]
+<pre><code>[TestGroup("ExclusiveGroup", Exclusive = true)]
 ClassExclusive { ... }
 </code></pre>
 
