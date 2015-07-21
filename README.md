@@ -33,8 +33,7 @@ See [Changelog](https://github.com/sscobici/ParallelTestRunner/blob/master/CHANG
 Feel free to open an [issue](https://github.com/sscobici/ParallelTestRunner/issues) if the tool needs to be enhanced or you have found a bug 
 
 # Additional Information
-By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively unless you specify plevel:TestMethod option
-There is a possibility to group several TestClasses or TestMethods in order to execute them consecutively.
+By default all TestClasses are executed in parallel. TestMethods inside each TestClass are executed consecutively unless you specify plevel:TestMethod option. There is a possibility to group several TestClasses or TestMethods in order to execute them consecutively.
 
 Create the following class in your test project and apply it to test class or method:
 ```
