@@ -23,7 +23,10 @@ namespace ParallelTestRunner.Common.Impl
 
         public string GetFile(string folder, string ext)
         {
-            return Directory.GetFiles(folder, "*.trx")[0];
+            string[] files = Directory.GetFiles(folder, "*.trx");
+            if (files.Length == 0)
+                throw new ResultNotfoundException();
+            return files[0];
         }
 
         public Stream OpenFile(string path)
