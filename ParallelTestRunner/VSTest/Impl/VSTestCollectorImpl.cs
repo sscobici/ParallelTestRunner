@@ -2,6 +2,7 @@
 using ParallelTestRunner.Common;
 using ParallelTestRunner.Common.Trx;
 using ParallelTestRunner.VSTest.Common;
+using ParallelTestRunner.Common.Impl;
 
 namespace ParallelTestRunner.VSTest.Impl
 {
@@ -17,10 +18,17 @@ namespace ParallelTestRunner.VSTest.Impl
 
             foreach (RunData item in items)
             {
-                using (var stream = FileHelper.OpenTrxFile(item))
+                try
                 {
-                    var file = TrxParser.Parse(stream);
-                    trxFileList.Add(file);
+                    using (var stream = FileHelper.OpenTrxFile(item))
+                    {
+                        var file = TrxParser.Parse(stream);
+                        trxFileList.Add(file);
+                    }
+                }
+                catch (ResultNotfoundException ex)
+                {
+                    //TODO log message?
                 }
             }
 

@@ -28,7 +28,17 @@ namespace ParallelTestRunner.Impl
 
         public string GetExecutablePath()
         {
-            return ConfigurationManager.AppSettings.Get(Provider);
+            string exePath = ConfigurationManager.AppSettings.Get(Provider);
+            if(string.IsNullOrEmpty(exePath))
+            {
+                // try to get it from env variable
+                exePath = Environment.GetEnvironmentVariable(Provider);
+            }
+            if (string.IsNullOrEmpty(exePath))
+            {
+                throw new Exception("Couldn't find provide for " + Provider + ". Please check the provider or set envrionment variable " + Provider + " to point to the path of vstest.console.exe");
+            }
+            return exePath;
         }
 
         public bool IsValid()

@@ -11,10 +11,11 @@ namespace ParallelTestRunner.VSTest.Common.Impl
         public void CreateSettingsFile(RunData data)
         {
             string settingFileName = string.Concat(data.Root, "\\", data.RunId, ".settings");
+            string platform = System.Environment.Is64BitProcess ? "x64" : "x86";
             string settingsFileContent = string.Concat(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?><RunSettings><RunConfiguration><ResultsDirectory>",
                 data.RunId,
-                "</ResultsDirectory></RunConfiguration></RunSettings>");
+                "</ResultsDirectory><TargetPlatform>"+platform+"</TargetPlatform></RunConfiguration></RunSettings>");
 
             WindowsFileHelper.WriteFile(settingFileName, settingsFileContent);
         }
